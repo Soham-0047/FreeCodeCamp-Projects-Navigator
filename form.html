@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+.header{
+    margin:20px 30px 20px 30px;
+    display:flex;
+    text-align: center;
+    justify-content: center;
+    border:2px solid black;
+    background-image:linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url("https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+ background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center;
+}
+#title{
+    margin-top:30px;
+    color:bisque;
+    font-family: 'Oswald', sans-serif;
+    font-size: 40px;
+    border:3px solid red;
+}
+#description{
+    padding-top:30px;
+    color:cadetblue;
+    font-family: 'Play', sans-serif;
+    margin-bottom:30px;
+}
+
+#name-lable,#email-lable,#number-label,#like-label,#label-check,#label-com{
+    margin-top:50px;
+    font-size:30px;
+    line-height: 3rem;
+    text-align:left;
+    display: flex;
+    transition:width 2s linear;
+}
+
+#survey-form{
+    color:white;
+    
+}
+#name,#email,#number,#mlike{
+    width:60rem;
+    height:2rem;
+}
+@media only screen and (min-width:300px),(max-width:600px){
+    #name,#email,#number,#mlike{
+        width:20rem;
+        
+}
+.header{
+    display: flex;
+    min-width:50%;
+    height:auto;
+    background-image:linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url("https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+}
+}
+.ch1{
+    list-style-type: none;
+    text-align: left;
+    font-size: 20px;
+}
+#btn{
+    display:inline-block;
+    justify-content: center;
+    text-align: center;
+    padding:10px;
+    margin-top:30px;
+    box-sizing: inherit;
+    width:9rem;
+    background: limegreen;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+}
+#btn:hover{
+    cursor: pointer;
+    box-shadow:9px 8px 8px white;
+    transition:2.5s;
+    border-radius: 50%;
+
+   
+}
+#s2{
+    border:4px double black;
+    padding:10px 50px 20px 50px;
+    border-radius: 15px;
+}
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey-Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+</head>
+
+
+
+
+<body>
+    <section class="header">
+        <div id="s2">
+        <h1 id="title">SURVEY FORM</h1>
+        <p id="description">Help Us With This From,To Give Better Experience</p>
+
+        <form id="survey-form">
+        <label for="name"id="name-lable">Name</label><br>
+        <input id="name"type="name"placeholder="NAME"><br>
+        <label for="email"id="email-lable">Email</label><br>
+        <input id="email"type="email"placeholder="EMAIL"><br>
+
+        <!-- <label for="number"id="number-label">Number</label><br>
+        <input id="number"type="number"placeholder="91-9564278461"max="12"> -->
+        <br>
+
+        <label for="like"id="like-label"placeholder="LIKE">Designation</label><br>
+       <select id="mlike"name="like"required>
+           <option disabled selected value>Select an option</option>
+           <option value="student">Student</option>
+           <option value="self-worker">Self-Worker</option>
+           <option value="freelancer">Freelancer</option>
+       </select><br>
+       <label for="check"id="label-check"required>Chose Your Field</label><br>
+       <ul class="ch1">
+       <li><label><input name="prefer"type="checkbox"value="Web-Dev">Web-Dev</label></li><br>
+      
+       <li><label><input name="prefer"type="checkbox"value="Web-Dev">Android-Dev</label></li><br>
+      
+       <li><label><input name="prefer"type="checkbox"value="Web-Dev">Machine Learnig</label></li><br>
+       
+       <li><label><input name="prefer"type="checkbox"value="Web-Dev">Ethical Hacking</label></li><br>
+       </ul>
+       <label for="message"id="label-com">Any Additional Comments</label><br>
+       <textarea name="message"placeholder="Your Comments"rows="10"cols="50"></textarea>
+        <input id="btn" type="submit"value="submit">
+   </form>
+      
+  </div>
+    </section>
+
+
+
+
+    
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+    (function() {
+        // https://dashboard.emailjs.com/admin/account
+        emailjs.init('W37FvQHoWhKLbMdSV');
+    })();
+</script>
+
+
+
+<script>
+    // listen to the form submission
+    document
+      .getElementById("survey-form")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const serviceID = "service_cr8mrcn";
+        const templateID = "template_5bwgxg8";
+
+        // send the email here
+        emailjs.sendForm(serviceID, templateID, this).then(
+          (response) => {
+            console.log("SUCCESS!", response.status, response.text);
+            alert("SUCCESS!");
+          },
+          (error) => {
+            console.log("FAILED...", error);
+            alert("FAILED...", error);
+          }
+        );
+      });
+  </script>
+
+</body>
+</html>

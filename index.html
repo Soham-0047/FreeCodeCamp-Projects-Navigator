@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Navigator - My Web Development Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 15px 15px 0 0;
+        }
+
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .icon-portfolio { background: linear-gradient(45deg, #ff6b6b, #ee5a24); }
+        .icon-product { background: linear-gradient(45deg, #4834d4, #686de0); }
+        .icon-tribute { background: linear-gradient(45deg, #20bf6b, #26de81); }
+        .icon-technical { background: linear-gradient(45deg, #fd79a8, #e84393); }
+        .icon-form { background: linear-gradient(45deg, #fd9644, #f9ca24); }
+        .icon-grid { background: linear-gradient(45deg, #6c5ce7, #a29bfe); }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .project-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: #ecf0f1;
+            color: #34495e;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: rgba(255,255,255,0.8);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-actions {
+                flex-direction: column;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🚀 Project Navigator</h1>
+            <p class="subtitle">Explore my web development projects and interactive demonstrations</p>
+        </header>
+
+        <div class="stats">
+            <div class="stat-card">
+                <span class="stat-number">6</span>
+                <span class="stat-label">Projects</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">10+</span>
+                <span class="stat-label">Technologies</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Responsive</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">∞</span>
+                <span class="stat-label">Learning</span>
+            </div>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-icon icon-portfolio">🎨</div>
+                <h3 class="project-title">Personal Portfolio</h3>
+                <p class="project-description">A sleek and modern portfolio website showcasing personal information, skills, and projects with responsive design and smooth animations.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">Responsive</span>
+                    <span class="tech-tag">Animation</span>
+                </div>
+                <div class="project-actions">
+                    <a href="Portfolio.html" class="btn btn-primary" onclick="showLoading()">
+                        🔗 View Project
+                    </a>
+                    <button class="btn btn-secondary" onclick="showInfo('portfolio')">
+                        ℹ️ Details
+                    </button>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon icon-product">🛍️</div>
+                <h3 class="project-title">Product Landing Page</h3>
+                <p class="project-description">A complete product landing page with navigation, feature showcases, pricing cards, email subscription, and interactive tilt effects.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Vanilla Tilt</span>
+                </div>
+                <div class="project-actions">
+                    <a href="Product_landing.html" class="btn btn-primary" onclick="showLoading()">
+                        🔗 View Project
+                    </a>
+                    <button class="btn btn-secondary" onclick="showInfo('product')">
+                        ℹ️ Details
+                    </button>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon icon-tribute">🎓</div>
+                <h3 class="project-title">Tribute Page</h3>
+                <p class="project-description">A beautiful tribute page dedicated to A.P.J. Abdul Kalam featuring his biography, achievements, and inspirational quotes with elegant typography.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">Typography</span>
+                    <span class="tech-tag">Biography</span>
+                </div>
+                <div class="project-actions">
+                    <a href="Tribute.html" class="btn btn-primary" onclick="showLoading()">
+                        🔗 View Project
+                    </a>
+                    <button class="btn btn-secondary" onclick="showInfo('tribute')">
+                        ℹ️ Details
+                    </button>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon icon-technical">📚</div>
+                <h3 class="project-title">Technical Documentation</h3>
+                <p class="project-description">A comprehensive JavaScript documentation page with fixed sidebar navigation, code examples, and detailed explanations of core concepts.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">Documentation</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+                <div class="project-actions">
+                    <a href="Technical_Doc.html" class="btn btn-primary" onclick="showLoading()">
+                        🔗 View Project
+                    </a>
+                    <button class="btn btn-secondary" onclick="showInfo('technical')">
+                        ℹ️ Details
+                    </button>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon icon-form">📝</div>
+                <h3 class="project-title">Survey Form</h3>
+                <p class="project-description">An interactive survey form with modern styling, form validation, and EmailJS integration for seamless form submission functionality.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">EmailJS</span>
+                    <span class="tech-tag">Forms</span>
+                </div>
+                <div class="project-actions">
+                    <a href="form.html" class="btn btn-primary" onclick="showLoading()">
+                        🔗 View Project
+                    </a>
+                    <button class="btn btn-secondary" onclick="showInfo('form')">
+                        ℹ️ Details
+                    </button>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon icon-grid">🔲</div>
+                <h3 class="project-title">CSS Grid Layout</h3>
+                <p class="project-description">A demonstration of modern CSS Grid layout techniques with responsive design, featuring colorful boxes and flexible grid arrangements.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS Grid</span>
+                    <span class="tech-tag">Responsive</span>
+                    <span class="tech-tag">Layout</span>
+                </div>
+                <div class="project-actions">
+                    <a href="grid.html" class="btn btn-primary" onclick="showLoading()">
+                        🔗 View Project
+                    </a>
+                    <button class="btn btn-secondary" onclick="showInfo('grid')">
+                        ℹ️ Details
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2024 Project Navigator. Built with ❤️ for showcasing web development skills.</p>
+            <p>Click any project to explore the implementation and design.</p>
+        </footer>
+    </div>
+
+    <script>
+        function showLoading() {
+            document.getElementById('loadingOverlay').style.display = 'flex';
+            
+            // Hide loading after a short delay (simulating page load)
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }, 1000);
+        }
+
+        function showInfo(projectType) {
+            const projectInfo = {
+                portfolio: {
+                    title: "Personal Portfolio",
+                    details: "A modern portfolio website featuring:\n• Responsive navigation header\n• Personal introduction section\n• Skills and experience cards\n• Project showcase gallery\n• Contact information\n• Smooth animations and hover effects\n• Mobile-first responsive design",
+                    files: "Portfolio.html, Portfolio.css"
+                },
+                product: {
+                    title: "Product Landing Page",
+                    details: "Complete product marketing page with:\n• Hero section with call-to-action\n• Product features showcase\n• Pricing comparison cards\n• Email newsletter subscription\n• Interactive tilt effects (vanilla-tilt.js)\n• Footer with social links\n• Responsive grid layouts",
+                    files: "Product_landing.html, Product_landing.css, vanilla-tilt.js"
+                },
+                tribute: {
+                    title: "A.P.J. Abdul Kalam Tribute",
+                    details: "Respectful tribute page featuring:\n• Hero image with caption\n• Biographical timeline\n• Achievement highlights\n• Inspirational quotes\n• Clean typography and spacing\n• Accessible content structure",
+                    files: "Tribute.html, stylet.css"
+                },
+                technical: {
+                    title: "JavaScript Documentation",
+                    details: "Comprehensive technical documentation:\n• Fixed sidebar navigation\n• Multiple content sections\n• Code examples and syntax highlighting\n• Table of contents\n• Responsive layout for mobile\n• Easy navigation between topics",
+                    files: "Technical_Doc.html"
+                },
+                form: {
+                    title: "Interactive Survey Form",
+                    details: "Modern form implementation with:\n• Multiple input types (text, email, select, radio, checkbox)\n• Form validation\n• EmailJS integration for submissions\n• Styled form elements\n• User-friendly interface\n• Success/error messaging",
+                    files: "form.html"
+                },
+                grid: {
+                    title: "CSS Grid Demonstration",
+                    details: "Modern layout techniques showcase:\n• CSS Grid implementation\n• Responsive grid areas\n• Colorful visual design\n• Auto-fit and minmax functions\n• Grid template areas\n• Mobile-responsive breakpoints",
+                    files: "grid.html"
+                }
+            };
+
+            const info = projectInfo[projectType];
+            alert(`${info.title}\n\n${info.details}\n\nFiles: ${info.files}`);
+        }
+
+        // Add entrance animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = 'all 0.6s ease';
+                card.style.transitionDelay = `${index * 0.1}s`;
+                observer.observe(card);
+            });
+
+            // Trigger initial animation
+            setTimeout(() => {
+                cards.forEach(card => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                });
+            }, 500);
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
