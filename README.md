@@ -274,14 +274,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - ✅ Professional UI/UX Design
 - ✅ Cross-browser Compatibility
 
-## 📞 Contact
-
-If you have any questions, suggestions, or would like to collaborate:
-
-- **GitHub**: [Your GitHub Profile]
-- **Email**: [Your Email Address]
-- **LinkedIn**: [Your LinkedIn Profile]
-
 ## 🙏 Acknowledgments
 
 - **A.P.J. Abdul Kalam** - Inspiration for the tribute page
